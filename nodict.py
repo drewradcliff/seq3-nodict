@@ -8,6 +8,7 @@ __author__ = 'aradcliff'
 
 class Node:
     def __init__(self, key, value=None):
+        """Initialize Node class"""
         self.hash = None
         self.key = key
         self.value = value
@@ -24,6 +25,7 @@ class Node:
 
 class NoDict:
     def __init__(self, num_buckets=10):
+        """Initialize NoDice class"""
         self.buckets = [[] for i in range(num_buckets)]
 
     def __repr__(self):
@@ -40,13 +42,18 @@ class NoDict:
         self.buckets[index].append(new_node)
 
     def get(self, key):
-        # Your code here
-        return
+        """Perform key-lookup and return node value"""
+        node_to_find = Node(key)
+        index = node_to_find.hash % len(self.buckets)
+        for node in self.buckets[index]:
+            if node == node_to_find:
+                return node.value
+        raise KeyError(f'{key} not found')
 
     def __getitem__(self, key):
-        # Your code here
-        return
+        """Enable square bracket reading behavior"""
+        return self.get(key)
 
     def __setitem__(self, key, value):
-        # Your code here
-        return
+        """Enable square bracket assignment behavior"""
+        self.add(key, value)
