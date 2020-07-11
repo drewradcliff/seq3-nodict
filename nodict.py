@@ -9,7 +9,6 @@ __author__ = 'aradcliff'
 class Node:
     def __init__(self, key, value=None):
         """Initialize Node class"""
-        self.hash = None
         self.key = key
         self.value = value
         self.hash = hash(self.key)
@@ -20,7 +19,7 @@ class Node:
 
     def __eq__(self, other):
         """Equal operator"""
-        return True if self.key == other.key else False
+        return self.key == other.key
 
 
 class NoDict:
