@@ -14,26 +14,30 @@ class Node:
         self.hash = hash(self.key)
 
     def __repr__(self):
-        """representation of key/value contents"""
+        """Representation of key/value contents"""
         return f'{self.__class__.__name__}({self.key}, {self.value})'
 
     def __eq__(self, other):
-        """equal operator"""
+        """Equal operator"""
         return True if self.key == other.key else False
 
 
 class NoDict:
     def __init__(self, num_buckets=10):
-        self.buckets = None
-        # Your code here
+        self.buckets = [[] for i in range(num_buckets)]
 
     def __repr__(self):
-        # Your code here
-        return
+        """Return a string representing the NoDict contents"""
+        return '\n'.join([f'{self.__class__.__name__}.{i}:{bucket}' for i, bucket in enumerate(self.buckets)])
 
     def add(self, key, value):
-        # Your code here
-        return
+        """Store new key/value into NoDict instance"""
+        new_node = Node(key, value)
+        index = new_node.hash % len(self.buckets)
+        for node in self.buckets[index]:
+            if node == new_node:
+                self.buckets[index].remove(node)
+        self.buckets[index].append(new_node)
 
     def get(self, key):
         # Your code here
