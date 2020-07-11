@@ -3,24 +3,23 @@
 Implementation of the NoDict assignment
 """
 
-__author__ = '???'
+__author__ = 'aradcliff'
 
 
 class Node:
     def __init__(self, key, value=None):
         self.hash = None
-        self.key = None
-        self.value = None
-        # Your code here
-        return
+        self.key = key
+        self.value = value
+        self.hash = hash(self.key)
 
     def __repr__(self):
-        # Your code here
-        return
+        """representation of key/value contents"""
+        return f'{self.__class__.__name__}({self.key}, {self.value})'
 
     def __eq__(self, other):
-        # Your code here
-        return
+        """equal operator"""
+        return True if self.key == other.key else False
 
 
 class NoDict:
